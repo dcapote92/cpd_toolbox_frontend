@@ -34,4 +34,4 @@ def main(page: ft.Page):
 
     page.go(page.route)
 
-ft.app(target=main)
+ft.app(target=main, assets_dir='assets')

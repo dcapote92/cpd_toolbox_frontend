@@ -1,6 +1,5 @@
 import flet as ft
 from components.app_bar import app_bar
-import resources
 
 
 def create_login_view(page: ft.Page):
@@ -11,10 +10,18 @@ def create_login_view(page: ft.Page):
     def register(e):
         page.go('/register')
 
+
     img_logo = ft.Image(
-        src='resources/logo.img',
+        src='logo.png',
         width=200,
-        height=80
+        height=200,
+        fit=ft.ImageFit.FILL
+    )
+
+    img_container = ft.Container(
+        content=img_logo,
+        alignment=ft.alignment.top_center,
+        padding=ft.padding.symmetric(vertical=30)
     )
 
     edt_user = ft.TextField(
@@ -31,7 +38,6 @@ def create_login_view(page: ft.Page):
         multiline=False,
         max_length=15,
         label='Senha',
-        autofocus=True,
         password=True,
         can_reveal_password=True
     )
@@ -40,14 +46,14 @@ def create_login_view(page: ft.Page):
         text='Entrar',
         icon= ft.Icons.LOGIN,
         width=120,
-        on_click=lambda e: print(f'Botão {btn_login.text} apertado')
+        on_click=login
     )
 
     btn_register = ft.ElevatedButton(
         text='Registrar',
-        icon= ft.Icons.APP_REGISTRATION,
+        icon= ft.Icons.APP_REGISTRATION_OUTLINED,
         width=120,
-        on_click=lambda e: print(f'Botão {btn_register.text} apertado')
+        on_click=register
     )
 
     rw_buttons = ft.Row(
@@ -60,20 +66,21 @@ def create_login_view(page: ft.Page):
     )
 
     box_container = ft.Container(
-        height=500,
+        height=600,
         width=400,
         border=ft.border.all(width=3, color=ft.Colors.BLUE_GREY_500),
         border_radius=ft.border_radius.all(10),
         alignment=ft.alignment.center,
         content=ft.Column(
             controls=[
+                img_container,
                 edt_user,
                 edt_password,
                 rw_buttons
             ],
             alignment=ft.MainAxisAlignment.CENTER,
         ),
-        padding=20,
+        padding=30,
     )
 
  
@@ -81,7 +88,6 @@ def create_login_view(page: ft.Page):
     return ft.View(
         route='/login',
         controls=[
-            img_logo,
             box_container,
             ft.Text('©2025 Daniel Capote')
         ],
