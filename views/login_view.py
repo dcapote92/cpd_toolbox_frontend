@@ -1,6 +1,4 @@
 import flet as ft
-from components.app_bar import app_bar
-
 
 def create_login_view(page: ft.Page):
     
@@ -27,10 +25,11 @@ def create_login_view(page: ft.Page):
     edt_user = ft.TextField(
         keyboard_type=ft.KeyboardType.NAME,
         multiline=False,
-        max_length=15,
-        label='Usuário',
+        max_length=9,
+        label='Mateus ID',
         enable_suggestions=True,
-        autofocus=True
+        autofocus=True,
+        capitalization= ft.TextCapitalization.CHARACTERS
     )
     
     edt_password = ft.TextField(

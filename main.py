@@ -2,6 +2,7 @@ import flet as ft
 from views.home_view import create_home_view
 from views.login_view import create_login_view
 from views.scales_view import create_scales_view 
+from views.register_view import create_register_view
 
 def main(page: ft.Page):
     page.title = 'CPD ToolBox'
@@ -11,13 +12,19 @@ def main(page: ft.Page):
 
         page.views.append(create_login_view(page))
 
-        if page.route == '/home':
-            page.views.append(create_home_view(page))
-        
-        elif page.route == '/scales':
-            page.views.append(create_home_view(page))
-            page.views.append(create_scales_view(page))
+
+        match(page.route):
+            case '/register':
+                page.views.append(create_register_view(page))
             
+            case '/home':
+                page.views.append(create_home_view(page))
+
+            case '/scales':
+                page.views.append(create_home_view(page))
+                page.views.append(create_scales_view(page))
+
+
         
         page.update()
 
