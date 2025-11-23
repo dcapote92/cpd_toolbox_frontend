@@ -4,7 +4,8 @@ def app_bar():
 
     return ft.AppBar(
         center_title=False,
-        bgcolor=ft.Colors.BLUE_200,
+        bgcolor=ft.Colors.BLUE_700,
+        color=ft.Colors.WHITE,
         actions=[
             ft.IconButton(
                 ft.Icons.LOGOUT,

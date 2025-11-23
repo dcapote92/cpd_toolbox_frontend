@@ -13,14 +13,14 @@ def add_listview_element(edt_num: ft.TextField, edt_model: ft.TextField, dropd_s
     except ValueError:
         page.snack_bar = ft.SnackBar(
             ft.Text('Erro: Verifique se "Número" e "Peso" são números válidos.'),
-            bgcolor=ft.Colors.RED
+            bgcolor=ft.Colors.RED_700
             )
         page.snack_bar.open = True
         page.update()
         return
 
 
-    color = ft.Colors.GREEN if weight == 20000 else (ft.Colors.YELLOW if 19995 <= weight <= 20005 else ft.Colors.RED )
+    color = ft.Colors.GREEN_700 if weight == 20000 else (ft.Colors.YELLOW_700 if 19995 <= weight <= 20005 else ft.Colors.RED_700 )
     formatted_weight = f'{weight:,.0f}'.replace(',','.')
 
     def format_none(txt):
@@ -95,7 +95,7 @@ def add_listview_element(edt_num: ft.TextField, edt_model: ft.TextField, dropd_s
     dropd_section.value = None
     edt_weight.value = ""
 
-    page.snack_bar = ft.SnackBar(ft.Text("Balança adicionada com sucesso!"), bgcolor=ft.Colors.GREEN)
+    page.snack_bar = ft.SnackBar(ft.Text("Balança adicionada com sucesso!"), bgcolor=ft.Colors.GREEN_700)
     page.open(page.snack_bar)
 
     page.close(dialog)

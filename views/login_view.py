@@ -2,8 +2,43 @@ import flet as ft
 
 def create_login_view(page: ft.Page):
     
+    edt_user = None
+    edt_password = None
+
+    def validate_fields():
+        is_valid = True
+
+        if not edt_user or len(edt_user.value) < 9:
+            edt_user.error_text = 'O Mateus ID deve ter 9 caracteres.'
+            is_valid = False
+        else: edt_user.error_text=None # get error message cleaned if the field is valid
+
+        if not edt_password or len(edt_password) < 8:
+            edt_password.error_text = 'A senha deve ter entre 8 e 15 caracteres.'
+            is_valid = False
+        else: edt_password.error_text=None
+
+        edt_user.update()
+        edt_password.update()
+
+        return is_valid
+        
+
     def login(e):
-        page.go('/home')
+        if validate_fields():
+            page.snack_bar = ft.SnackBar(
+                ft.Text(f'Login bem-sucedido!'),
+                bgcolor=ft.Colors.GREEN_700)
+            page.go('/home')
+            page.open(page.snack_bar)
+        else:
+            page.snack_bar = ft.SnackBar(
+                ft.Text(f'Por favor corrija os erros nos campos antes de continuar.!'),
+                bgcolor=ft.Colors.RED_700,
+                duration=3000
+            )
+            page.open(page.snack_bar)
+            page.update()
 
     def register(e):
         page.go('/register')
@@ -19,7 +54,7 @@ def create_login_view(page: ft.Page):
     img_container = ft.Container(
         content=img_logo,
         alignment=ft.alignment.top_center,
-        padding=ft.padding.symmetric(vertical=30)
+        padding=ft.padding.only(top=10, bottom=30)
     )
 
     edt_user = ft.TextField(
@@ -45,13 +80,17 @@ def create_login_view(page: ft.Page):
         text='Entrar',
         icon= ft.Icons.LOGIN,
         width=120,
+        bgcolor=ft.Colors.BLUE_700,
+        color=ft.Colors.WHITE,
         on_click=login
     )
 
     btn_register = ft.ElevatedButton(
         text='Registrar',
-        icon= ft.Icons.APP_REGISTRATION_OUTLINED,
+        icon= ft.Icons.PERSON_ADD_ALT_1,
         width=120,
+        bgcolor=ft.Colors.GREEN_700,
+        color=ft.Colors.WHITE,
         on_click=register
     )
 
@@ -75,6 +114,7 @@ def create_login_view(page: ft.Page):
                 img_container,
                 edt_user,
                 edt_password,
+                ft.Divider(height=20,color=ft.Colors.TRANSPARENT),
                 rw_buttons
             ],
             alignment=ft.MainAxisAlignment.CENTER,
@@ -82,7 +122,7 @@ def create_login_view(page: ft.Page):
         padding=30,
     )
 
- 
+
 
     return ft.View(
         route='/login',

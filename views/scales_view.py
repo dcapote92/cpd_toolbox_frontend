@@ -85,7 +85,8 @@ def create_scales_view(page: ft.Page):
         dropd_section.value = None
         edt_weight.value = ""
         page.snack_bar = ft.SnackBar(
-            ft.Text('Ação Cancelada!')
+            ft.Text('Ação Cancelada!'),
+            bgcolor=ft.Colors.YELLOW_700
         )
         page.open(page.snack_bar)
         page.update()
