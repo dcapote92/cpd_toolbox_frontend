@@ -15,14 +15,14 @@ def app_bar():
             actions=[
                 ft.ElevatedButton(
                     icon=ft.Icons.EXIT_TO_APP,
-                    bgcolor=ft.Colors.GREEN_700,
+                    bgcolor=ft.Colors.GREEN_600,
                     color=ft.Colors.WHITE,
                     on_click=lambda ev: [close_dialog(ev), ev.page.go('/login', replace=True)],
                     text='Confirmar'
                 ),
                 ft.ElevatedButton(
                     icon=ft.Icons.CANCEL,
-                    bgcolor=ft.Colors.RED_700,
+                    bgcolor=ft.Colors.RED_600,
                     color=ft.Colors.WHITE,
                     on_click=close_dialog,
                     text='Cancelar'
