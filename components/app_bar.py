@@ -17,7 +17,7 @@ def app_bar():
                     icon=ft.Icons.EXIT_TO_APP,
                     bgcolor=ft.Colors.GREEN_700,
                     color=ft.Colors.WHITE,
-                    on_click=lambda ev: [close_dialog(ev), ev.page.go('/login')],
+                    on_click=lambda ev: [close_dialog(ev), ev.page.go('/login', replace=True)],
                     text='Confirmar'
                 ),
                 ft.ElevatedButton(

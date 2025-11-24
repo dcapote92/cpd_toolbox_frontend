@@ -8,7 +8,7 @@ def main(page: ft.Page):
     page.title = 'CPD ToolBox'
 
     def route_change(route):
-        print(f"Rota atual: {page.route}") 
+        page.views.clear()
 
         match(page.route):
             case '/' | '/login':
