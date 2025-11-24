@@ -107,6 +107,7 @@ def create_scales_view(page: ft.Page):
 
     btn_add_element = ft.IconButton(
         icon=ft.Icons.ADD,
+        icon_color=ft.Colors.BLUE_700,
         on_click=lambda e: open_add_dialog(e)
     )
     
@@ -115,6 +116,7 @@ def create_scales_view(page: ft.Page):
     
     btn_export = ft.IconButton(
         icon=ft.Icons.PICTURE_AS_PDF_OUTLINED,
+        icon_color=ft.Colors.BLUE_700,
         on_click=lambda e: print('Save clicado')
     )
     rw_add_and_search = ft.Row(
@@ -131,6 +133,7 @@ def create_scales_view(page: ft.Page):
         controls=[
         app_bar(),
         rw_add_and_search,
+        ft.Divider(height=20,color=ft.Colors.TRANSPARENT),
         scales_listview
         ],
         horizontal_alignment = ft.CrossAxisAlignment.CENTER,

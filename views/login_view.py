@@ -25,7 +25,8 @@ def create_login_view(page: ft.Page):
         
 
     def login(e):
-        if validate_fields():
+        page.go('/home')
+        ''' if validate_fields():
             page.snack_bar = ft.SnackBar(
                 ft.Text(f'Login bem-sucedido!'),
                 bgcolor=ft.Colors.GREEN_700)
@@ -38,7 +39,7 @@ def create_login_view(page: ft.Page):
                 duration=3000
             )
             page.open(page.snack_bar)
-            page.update()
+            page.update()'''
 
     def register(e):
         page.go('/register')

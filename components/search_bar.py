@@ -16,6 +16,7 @@ class SearchBar(ft.Container):
         self.btn_search = ft.IconButton(
             icon=ft.Icons.SEARCH,
             tooltip='Buscar',
+            icon_color=ft.Colors.BLUE_700,
             on_click=lambda e: self._expand(with_focus=True)
         )
 
