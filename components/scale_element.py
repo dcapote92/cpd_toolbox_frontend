@@ -1,20 +1,15 @@
 import flet as ft
 
-# A classe agora herda diretamente de ft.ExpansionTile
 class ScaleListItem(ft.ExpansionTile):
-    """
-    Componente personalizado que representa uma Balança na lista, herdando 
-    diretamente do ft.ExpansionTile para melhor encapsulamento.
-    """
+    """Custom scale item"""
+
     def __init__(self, number: int, model: str, section: str, weight: int, **kwargs):
         
-        # Armazenar dados da Balança no objeto
         self.scale_number = number
         self.scale_model = model
         self.scale_section = section
         self.scale_weight = weight
         
-        # Propriedades de status (placeholders)
         self.measurement_date = None
         self.measured_by = None
         self.calibration_date = None
@@ -22,11 +17,10 @@ class ScaleListItem(ft.ExpansionTile):
         self.clean_date = None
         self.cleaned_by = None
 
-        # Chamar o construtor do pai (ft.ExpansionTile)
-        # Toda a lógica de construção agora está aqui (antes estava em build())
-        super().__init__(**kwargs)
+        scale_title =ft.Text(f'Balança: {self.scale_number}', weight=ft.FontWeight.BOLD)
 
-        # 1. Lógica da Cor de Status
+        super().__init__(title=scale_title, **kwargs)
+
         color = ft.Colors.GREEN_700
         if self.scale_weight == 20000:
             color = ft.Colors.GREEN_700
@@ -37,33 +31,27 @@ class ScaleListItem(ft.ExpansionTile):
 
         formatted_weight = f'{self.scale_weight:,.0f}'.replace(',', '.')
 
-        # 2. Linha de Subtítulos (Modelo, Setor, Peso, Status)
         subtitles = ft.Row( 
             controls=[ 
                 ft.Text(f'Modelo: {self.scale_model}', size=12, color=ft.Colors.GREY_600), 
                 ft.Text(f'Setor: {self.scale_section}', size=12, color=ft.Colors.GREY_600), 
-                ft.Text(f'Capacidade: {formatted_weight} Kg', size=12, color=ft.Colors.GREY_600),
+                ft.Text(f'Ultimo peso colhido: {formatted_weight} Kg', size=12, color=ft.Colors.GREY_600),
                 ft.Icon(ft.Icons.CHECK_CIRCLE, color=color, size=18, tooltip="Status de Aferição")
             ],
             spacing=15
         )
 
-        # 3. Funções auxiliares (Definidas dentro do __init__ ou como métodos)
         def format_none(txt):
-            """Formata valores None/vazios para 'N/A'."""
+            """Format None/empty values to 'N/A'."""
             return txt if txt else 'N/A'
 
         def delete_scale(e):
-            # A remoção agora funciona da mesma forma, pois 'self' é o controlo
-            # na lista de controlos do pai (ListView)
             if self.parent:
+                snack_bar = ft.SnackBar(ft.Text(f"Balança N° {self.scale_number} removida."), bgcolor=ft.Colors.RED_600)
                 self.parent.controls.remove(self)
-                self.page.update()
-                self.page.snack_bar = ft.SnackBar(ft.Text(f"Balança N° {self.scale_number} removida."), bgcolor=ft.Colors.RED_600)
-                self.page.snack_bar.open = True
+                self.page.open(snack_bar)
                 self.page.update()
 
-        # 4. Conteúdo Expandido
         last_measurement = ft.Row(
             controls=[
                 ft.Text(f'Última aferição: {format_none(self.measurement_date)}'),
@@ -91,7 +79,6 @@ class ScaleListItem(ft.ExpansionTile):
             spacing=30
         )
 
-        # 5. Botões de Ação
         btn_edit = ft.TextButton("Editar", icon=ft.Icons.EDIT, icon_color=ft.Colors.BLUE_600)
         btn_delete = ft.TextButton("Remover", icon=ft.Icons.DELETE, icon_color=ft.Colors.RED_600, on_click=delete_scale)
 
@@ -104,7 +91,6 @@ class ScaleListItem(ft.ExpansionTile):
             spacing=10
         )
 
-        # 6. Atribuição das Propriedades do ExpansionTile (self)
         self.title = ft.Text(f'Balança: {self.scale_number}', weight=ft.FontWeight.BOLD)
         self.subtitle = subtitles
         self.controls = [last_measurement, last_calibration, last_clean, ft.Divider(), rw_buttons]
