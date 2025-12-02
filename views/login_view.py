@@ -8,8 +8,8 @@ def create_login_view(page: ft.Page):
     def validate_fields():
         is_valid = True
 
-        if not edt_user or len(edt_user.value) < 9:
-            edt_user.error_text = 'O Mateus ID deve ter 9 caracteres.'
+        if not edt_user:
+            edt_user.error_text = 'Usuário é obrigatório.'
             is_valid = False
         else: edt_user.error_text=None # get error message cleaned if the field is valid
 
@@ -61,8 +61,8 @@ def create_login_view(page: ft.Page):
     edt_user = ft.TextField(
         keyboard_type=ft.KeyboardType.NAME,
         multiline=False,
-        max_length=9,
-        label='Mateus ID',
+        max_length=36,
+        label='Usuário',
         enable_suggestions=True,
         autofocus=True,
         capitalization= ft.TextCapitalization.CHARACTERS

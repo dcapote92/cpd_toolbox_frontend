@@ -4,8 +4,9 @@ import re
 def create_register_view(page: ft.Page):
     
     # controls reference
-    edt_name = None
-    edt_gm_id = None
+    edt_user = None
+    edt_email = None
+
     edt_password = None
     edt_confirm_password = None
     btn_registrate = None
@@ -13,27 +14,28 @@ def create_register_view(page: ft.Page):
     # validation functions
 
     def check_all_valid():
-        is_name_valid = bool(edt_name.value) and not edt_name.error_text
-        is_id_valid = bool(edt_gm_id.value) and not edt_gm_id.error_text
+        is_user_valid = bool(edt_user.value) and not edt_user.error_text
+        is_email_valid = bool(edt_email.value) and not edt_email.error_text
         is_pass_valid = bool(edt_password.value) and not edt_password.error_text
         is_confirm_valid = bool(edt_confirm_password) and not edt_confirm_password.error_text
 
-        btn_registrate.disabled = not (is_name_valid and is_id_valid and is_pass_valid and is_confirm_valid)
+        btn_registrate.disabled = not ( is_user_valid and is_email_valid and is_pass_valid and is_confirm_valid)
         btn_registrate.update()
 
-    def validate_name(e):
-        name = e.control.value
-        if not name or len(name) < 3:
-            e.control.error_text = 'Nome deve ter no mínimo 3 caracteres.'
+
+    def validate_user(e):
+        user = e.control.value
+        if not user or len(user) < 3 :
+            e.control.error_text = 'User deve ter no mínimo 3 caracteres.' 
         else: e.control.error_text = None
 
         e.control.update()
         check_all_valid()
 
-    def validate_gm_id(e):
-        gm_id = e.control.value
-        if not re.fullmatch(r'GM\d{7}', gm_id.upper()):
-            e.control.error_text = 'Mateus ID inválido. Formato esperado GM1234567.' 
+    def validate_email(e):
+        email = e.control.value
+        if not email or '@' not in email:
+            e.control.error_text = 'Email deve conter o caracter especial @.'
         else: e.control.error_text = None
 
         e.control.update()
@@ -107,25 +109,23 @@ def create_register_view(page: ft.Page):
         padding=ft.padding.only(top=10, bottom=30)
     )
 
-    edt_name = ft.TextField(
-        keyboard_type=ft.KeyboardType.NAME,
-        multiline=False,
-        max_length=36,
-        label='Nome Completo',
-        enable_suggestions=True,
-        autofocus=True,
-        capitalization= ft.TextCapitalization.WORDS,
-        on_change=validate_name
-    )
-
-    edt_gm_id = ft.TextField(
+    edt_user = ft.TextField(
         multiline=False,
         max_length=9,
         label='Mateus ID',
         enable_suggestions=True,
         hint_text='GM1234567',
         capitalization= ft.TextCapitalization.CHARACTERS,
-        on_change=validate_gm_id
+        on_change=validate_user
+    )
+
+    edt_email = ft.TextField(
+        keyboard_type=ft.KeyboardType.EMAIL,
+        multiline=False,
+        max_length=36,
+        label='Email',
+        enable_suggestions=True,
+        on_change=validate_email
     )
     
     edt_password = ft.TextField(
@@ -190,8 +190,8 @@ def create_register_view(page: ft.Page):
         content=ft.Column(
             controls=[
                 ctnr_logo,
-                edt_name,
-                edt_gm_id,
+                edt_user,
+                edt_email,
                 edt_password,
                 edt_confirm_password,
                 ckb_admin,
@@ -205,8 +205,8 @@ def create_register_view(page: ft.Page):
 
     # this is necessary for functions that have late execution can access them
     globals().update(
-        edt_name=edt_name,
-        edt_gm_id=edt_gm_id,
+        edt_user=edt_user,
+        edt_email=edt_email,
         edt_password=edt_password,
         edt_confirm_password=edt_confirm_password,
         btn_registrate=btn_registrate

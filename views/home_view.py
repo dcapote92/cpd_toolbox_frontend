@@ -21,7 +21,6 @@ def create_home_view(page: ft.Page):
                         ft.Icon(
                             name=ft.Icons.SCALE,
                             size=60,
-                            #color=ft.Colors.BLUE_700
                         ),
                         ft.Text(
                             value='Gerir Balanças',
