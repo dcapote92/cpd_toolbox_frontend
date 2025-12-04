@@ -111,10 +111,9 @@ def create_register_view(page: ft.Page):
 
     edt_user = ft.TextField(
         multiline=False,
-        max_length=9,
-        label='Mateus ID',
+        max_length=15,
+        label='Usuário',
         enable_suggestions=True,
-        hint_text='GM1234567',
         capitalization= ft.TextCapitalization.CHARACTERS,
         on_change=validate_user
     )
@@ -168,6 +167,8 @@ def create_register_view(page: ft.Page):
     btn_cancel = ft.ElevatedButton(
         text='Cancelar',
         icon= ft.Icons.CANCEL,
+        bgcolor=ft.Colors.RED_700,
+        color=ft.Colors.WHITE,
         width=120,
         on_click=cancel
     )

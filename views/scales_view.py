@@ -3,7 +3,6 @@ import actions
 from components.app_bar import app_bar
 from components.add_scale import scale_dialog
 from components.scale_element import ScaleListItem
-from components.search_bar import SearchBar
 
 def create_scales_view(page: ft.Page):
 
@@ -19,7 +18,12 @@ def create_scales_view(page: ft.Page):
         on_click=lambda e: scale_dialog(e.page, scales_listview)
     )
     
-    search_bar = SearchBar(on_search=actions.handle_search_update)
+    search_bar = ft.TextField(
+        multiline=False,
+        max_length=36,
+        hint_text='Buscar',
+        on_change=None
+    )
     
     btn_export = ft.IconButton(
         icon=ft.Icons.PICTURE_AS_PDF_OUTLINED,

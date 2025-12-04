@@ -32,6 +32,26 @@ def app_bar():
 
         e.page.open(dialog)
 
+    def show_about(e):
+        dlg_about = ft.AlertDialog(
+            modal=True,
+            title='Sobre...',
+            content=ft.Text('CPD ToolBox, é um projeto pessoal que segue a' \
+            ' ideia de manter todas as ferramentas necessarias para ' \
+            'um CPD centralizadas e facilmente acessíveis'),
+            actions=[
+                ft.TextButton('Fechar',
+                              ft.Icons.CLOSE,
+                              icon_color=ft.Colors.WHITE,
+                              style=ft.ButtonStyle(bgcolor=ft.Colors.RED_600, color=ft.Colors.WHITE),
+                              autofocus=True,
+                              on_click=lambda e: e.page.close(dlg_about)
+                              )
+            ],
+            action_button_padding=10,
+            actions_alignment=ft.MainAxisAlignment.END
+        )
+        e.page.open(dlg_about)
         
 
     return ft.AppBar(
@@ -46,27 +66,14 @@ def app_bar():
                 on_click= lambda e: e.page.go('/home')
             ),
             ft.IconButton(
+                ft.Icons.INFO,
+                tooltip='Sobre',
+                on_click=show_about
+            ),
+            ft.IconButton(
                 ft.Icons.LOGOUT,
                 tooltip='Sair',
                 on_click= logout_check
-            ),
-            ft.PopupMenuButton(
-                icon=ft.Icons.MENU,
-                items=[
-                    ft.PopupMenuItem(
-                        text='Configurações',
-                        icon=ft.Icons.SETTINGS,
-                        on_click=lambda e: print('Clicado Settings'),
-                        data="Configurações"
-                    ),
-                    ft.PopupMenuItem(
-                        text='Sobre',
-                        icon=ft.Icons.INFO,
-                        on_click=lambda e: print('Clicado Sobre'),
-                        data="Sobre"
-                    ),
-                ],
-                tooltip='Menu'
             )
         ]
     )
