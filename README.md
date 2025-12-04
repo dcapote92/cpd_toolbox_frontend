@@ -1,5 +1,5 @@
-﻿# CPD ToolBox  
-## A web app with some tools to ease work and an intend of centralised platform  
+﻿# CPD ToolBox Frontend
+## A web app (frontend) with some tools to ease work and an intend of centralised platform  
 ### Login  
 ![App demo](example_views/login.png)  
 ### Home  
